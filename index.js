@@ -11,7 +11,7 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
-    buildManifest = require("../.next/build-manifest.json");
+    buildManifest = require("./.next/build-manifest.json");
     return buildManifest;
   } catch (e) {
     if (!buildManifest) {
@@ -25,7 +25,7 @@ function loadBuildManifest() {
 function loadServerlessPagesManifest() {
   let pagesManifest;
   try {
-    pagesManifest = require("../.next/serverless/pages-manifest.json");
+    pagesManifest = require("./.next/serverless/pages-manifest.json");
     return pagesManifest;
   } catch (e) {
     if (!pagesManifest) {
