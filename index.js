@@ -105,13 +105,13 @@ async function main() {
   await exec.exec(installCommand);
   log("Building project...");
 
-  const buildManifestPath = path.join(__dirname, "..", ".next");
+  // const buildManifestPath = path.join(__dirname, ".next");
 
   await exec.exec(buildCommand);
   await exec.exec("ls -lat");
   await exec.exec("pwd");
   await exec.exec("ls .next");
-  await exec.exec("ls " + buildManifestPath);
+  // await exec.exec("ls " + buildManifestPath);
 
   core.setOutput("Build complete.");
 
