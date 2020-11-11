@@ -92,7 +92,7 @@ async function main() {
   const token = core.getInput("token");
   log("Initializing github...", token);
   const octokit = new github.getOctokit(token);
-  log("Okto", octokit);
+  log("Okto. " + token);
 
   const installCommand = core.getInput("install_command");
   const buildCommand = core.getInput("build_command");
