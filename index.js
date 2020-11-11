@@ -118,11 +118,11 @@ async function main() {
 
   log("Loading build manifest...");
   const buildManifest = loadBuildManifest();
-  log("Loading serverless pages manifest...");
-  const serverlessPagesManifest = loadServerlessPagesManifest();
+  // log("Loading serverless pages manifest...");
+  // const serverlessPagesManifest = loadServerlessPagesManifest();
   log("Checking file sizes...");
   const pages = parseBuildManifest(buildManifest);
-  const serverlessPages = parseServerlessPagesManifest(serverlessPagesManifest);
+  // const serverlessPages = parseServerlessPagesManifest(serverlessPagesManifest);
 
   Object.keys(pages).forEach(async (page) => {
     const resolvedFiles = await Promise.all(pages[page]);
