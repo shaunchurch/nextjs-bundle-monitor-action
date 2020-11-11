@@ -19,10 +19,9 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
-    const matchersPath = path.join(__dirname);
-    console.log("WHERE AM I?", matchersPath);
-    const buildManifestPath = path.join(__dirname, "..", ".next");
-    buildManifest = __webpack_require__(1812);
+    // const matchersPath = path.join(__dirname);
+    const workspace = core.getInput("workspace");
+    buildManifest = require(workspace + "/.next/build-manifest.json");
     return buildManifest;
   } catch (e) {
     if (!buildManifest) {
@@ -7106,14 +7105,6 @@ function wrappy (fn, cb) {
 /***/ ((module) => {
 
 module.exports = eval("require")(".next/serverless/pages-manifest.json");
-
-
-/***/ }),
-
-/***/ 1812:
-/***/ ((module) => {
-
-module.exports = eval("require")("/Users/triskelion/Code/OS/.next/build-manifest.json");
 
 
 /***/ }),

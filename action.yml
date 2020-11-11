@@ -14,6 +14,9 @@ inputs:
     description: "Output directory, default: .next"
     required: true
     default: ".next"
+  workspace:
+    description: "Working directory"
+    required: true
 runs:
   using: "node12"
   main: "index.js"

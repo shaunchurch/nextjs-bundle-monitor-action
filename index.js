@@ -12,10 +12,9 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
-    const matchersPath = path.join(__dirname);
-    console.log("WHERE AM I?", matchersPath);
-    const buildManifestPath = path.join(__dirname, "..", ".next");
-    buildManifest = require(buildManifestPath + "/build-manifest.json");
+    // const matchersPath = path.join(__dirname);
+    const workspace = core.getInput("workspace");
+    buildManifest = require(workspace + "/.next/build-manifest.json");
     return buildManifest;
   } catch (e) {
     if (!buildManifest) {
