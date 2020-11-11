@@ -16,7 +16,7 @@ inputs:
     default: ".next"
 runs:
   using: "node12"
-  main: "dist/index.js"
+  main: "index.js"
 outputs:
   size: # output will be available to future steps
     description: "Next.js bundle size monitor"
