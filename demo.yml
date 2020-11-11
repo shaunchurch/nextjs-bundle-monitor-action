@@ -1,0 +1,19 @@
+name: Next.js Bundle Monitor
+
+on:
+  pull_request:
+    types: ["opened", "reopened", "synchronize"]
+jobs:
+  calculate-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.0.0"
+      - uses: shaunchurch/nextjs-bundle-monitor-action@master
+        with:
+          bootstrap: "yarn install"
+          build_command: "yarn build"
+          dist_path: ".next"
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,25 @@
+name: "Next.js Bundle Monitor"
+description: "Github action to monitor the size of your Next.js bundle."
+author: "shaunchurch"
+inputs:
+  install_command:
+    description: "Command to install dependencies, default: npm install"
+    required: true
+    default: "npm install"
+  build_command:
+    description: "Command for building the app, default: npm run build"
+    required: true
+    default: "npm run build"
+  dist_path:
+    description: "Output directory, default: .next"
+    required: true
+    default: ".next"
+runs:
+  using: "node12"
+  main: "dist/index.js"
+outputs:
+  size: # output will be available to future steps
+    description: "Next.js bundle size monitor"
+branding:
+  icon: "zap"
+  color: "green"
