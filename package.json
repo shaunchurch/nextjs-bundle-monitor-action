@@ -4,7 +4,8 @@
   "description": "",
   "main": "build-check.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "ncc build index.js -o dist"
   },
   "keywords": [],
   "author": "Shaun Church",
@@ -13,5 +14,8 @@
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.25.1"
   }
 }
