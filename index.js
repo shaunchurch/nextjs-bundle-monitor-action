@@ -13,8 +13,8 @@ function loadBuildManifest() {
   try {
     const matchersPath = path.join(__dirname);
     console.log("WHERE AM I?", matchersPath);
-
-    buildManifest = require(".next/build-manifest.json");
+    const buildManifestPath = path.join(__dirname, "..", ".next");
+    buildManifest = require(buildManifestPath + "/build-manifest.json");
     return buildManifest;
   } catch (e) {
     if (!buildManifest) {
@@ -101,13 +101,17 @@ async function main() {
   const buildCommand = core.getInput("build_command");
   const distPath = core.getInput("dist_path");
 
-  console.log("Installing dependencies...");
+  log("Installing dependencies...");
   await exec.exec(installCommand);
-  console.log("Building project...");
+  log("Building project...");
+
+  const buildManifestPath = path.join(__dirname, "..", ".next");
+
   await exec.exec(buildCommand);
   await exec.exec("ls -lat");
   await exec.exec("pwd");
   await exec.exec("ls .next");
+  await exec.exec("ls " + buildManifestPath);
 
   core.setOutput("Build complete.");
 
