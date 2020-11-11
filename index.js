@@ -11,6 +11,9 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
+    const matchersPath = path.join(__dirname);
+    console.log("WHERE AM I?", matchersPath);
+
     buildManifest = require(".next/build-manifest.json");
     return buildManifest;
   } catch (e) {
@@ -104,6 +107,8 @@ async function main() {
   await exec.exec(buildCommand);
   await exec.exec("ls -lat");
   await exec.exec("pwd");
+  await exec.exec("ls .next");
+
   core.setOutput("Build complete.");
 
   log("Loading build manifest...");
