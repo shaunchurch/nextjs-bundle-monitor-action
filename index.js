@@ -12,7 +12,6 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
-    // const matchersPath = path.join(__dirname);
     const workspace = core.getInput("workspace");
     buildManifest = require(workspace + "/.next/build-manifest.json");
     return buildManifest;
@@ -28,7 +27,9 @@ function loadBuildManifest() {
 function loadServerlessPagesManifest() {
   let pagesManifest;
   try {
-    pagesManifest = require(".next/serverless/pages-manifest.json");
+    const workspace = core.getInput("workspace");
+    pagesManifest = require(workspace +
+      "/.next/serverless/pages-manifest.json");
     return pagesManifest;
   } catch (e) {
     if (!pagesManifest) {
