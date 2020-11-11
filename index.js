@@ -102,6 +102,8 @@ async function main() {
   await exec.exec(installCommand);
   console.log("Building project...");
   await exec.exec(buildCommand);
+  await exec.exec("ls -lat");
+  await exec.exec("pwd");
   core.setOutput("Build complete.");
 
   log("Loading build manifest...");
