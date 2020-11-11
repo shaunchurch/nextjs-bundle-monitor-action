@@ -10,6 +10,7 @@ const zlib = __webpack_require__(8761);
 const core = __webpack_require__(2186);
 const exec = __webpack_require__(1514);
 const github = __webpack_require__(5438);
+const path = __webpack_require__(5622);
 
 function log(...args) {
   console.log(...args);
@@ -18,12 +19,15 @@ function log(...args) {
 function loadBuildManifest() {
   let buildManifest;
   try {
-    buildManifest = __webpack_require__(6555);
+    const matchersPath = path.join(__dirname);
+    console.log("WHERE AM I?", matchersPath);
+    const buildManifestPath = path.join(__dirname, "..", ".next");
+    buildManifest = __webpack_require__(1812);
     return buildManifest;
   } catch (e) {
     if (!buildManifest) {
       throw new Error(
-        "No build manifest found at `./.next/build-manifest.json`. Try `npm install && npm run build`."
+        "No build manifest found at `.next/build-manifest.json`. Try `npm install && npm run build`."
       );
     }
   }
@@ -32,12 +36,12 @@ function loadBuildManifest() {
 function loadServerlessPagesManifest() {
   let pagesManifest;
   try {
-    pagesManifest = __webpack_require__(8937);
+    pagesManifest = __webpack_require__(1966);
     return pagesManifest;
   } catch (e) {
     if (!pagesManifest) {
       throw new Error(
-        "No pages manifest found at `./.next/serverless/pages-manifest.json`. Try `npm install && npm run build`."
+        "No pages manifest found at `.next/serverless/pages-manifest.json`. Try `npm install && npm run build`."
       );
     }
   }
@@ -99,16 +103,24 @@ async function main() {
   const token = core.getInput("token");
   log("Initializing github...", token);
   const octokit = new github.getOctokit(token);
-  log("Okto", octokit);
+  log("Okto. " + token);
 
   const installCommand = core.getInput("install_command");
   const buildCommand = core.getInput("build_command");
   const distPath = core.getInput("dist_path");
 
-  console.log("Installing dependencies...");
+  log("Installing dependencies...");
   await exec.exec(installCommand);
-  console.log("Building project...");
+  log("Building project...");
+
+  const buildManifestPath = path.join(__dirname, "..", ".next");
+
   await exec.exec(buildCommand);
+  await exec.exec("ls -lat");
+  await exec.exec("pwd");
+  await exec.exec("ls .next");
+  await exec.exec("ls " + buildManifestPath);
+
   core.setOutput("Build complete.");
 
   log("Loading build manifest...");
@@ -7090,18 +7102,18 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 6555:
+/***/ 1966:
 /***/ ((module) => {
 
-module.exports = eval("require")("../.next/build-manifest.json");
+module.exports = eval("require")(".next/serverless/pages-manifest.json");
 
 
 /***/ }),
 
-/***/ 8937:
+/***/ 1812:
 /***/ ((module) => {
 
-module.exports = eval("require")("../.next/serverless/pages-manifest.json");
+module.exports = eval("require")("/Users/triskelion/Code/OS/.next/build-manifest.json");
 
 
 /***/ }),
