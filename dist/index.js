@@ -64,8 +64,12 @@ function parseServerlessPagesManifest(serverlessPagesManifest) {
 
 async function gzipFile(filename) {
   return new Promise((resolve, reject) => {
-    const fileContents = fs.createReadStream("../.next/" + filename);
-    const writeStream = fs.createWriteStream("../.next/" + filename + ".gz");
+    const workspace = core.getInput("workspace");
+
+    const fileContents = fs.createReadStream(workspace + "/.next/" + filename);
+    const writeStream = fs.createWriteStream(
+      workspace + "/.next/" + filename + ".gz"
+    );
     const zip = zlib.createGzip();
     fileContents
       .pipe(zip)
@@ -79,7 +83,8 @@ async function gzipFile(filename) {
 
 async function sizeBundle(bundle) {
   try {
-    const bundlePath = "../.next/" + bundle;
+    const workspace = core.getInput("workspace");
+    const bundlePath = workspace + "/.next/" + bundle;
     const fileStats = fs.statSync(bundlePath);
     const gzippedFile = await gzipFile(bundlePath);
     const gzippedFileStats = fs.statSync(bundlePath + ".gz");
@@ -125,11 +130,11 @@ async function main() {
 
   log("Loading build manifest...");
   const buildManifest = loadBuildManifest();
-  log("Loading serverless pages manifest...");
-  const serverlessPagesManifest = loadServerlessPagesManifest();
+  // log("Loading serverless pages manifest...");
+  // const serverlessPagesManifest = loadServerlessPagesManifest();
   log("Checking file sizes...");
   const pages = parseBuildManifest(buildManifest);
-  const serverlessPages = parseServerlessPagesManifest(serverlessPagesManifest);
+  // const serverlessPages = parseServerlessPagesManifest(serverlessPagesManifest);
 
   Object.keys(pages).forEach(async (page) => {
     const resolvedFiles = await Promise.all(pages[page]);
