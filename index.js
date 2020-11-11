@@ -3,6 +3,7 @@ const zlib = require("zlib");
 const core = require("@actions/core");
 const exec = require("@actions/exec");
 const github = require("@actions/github");
+const path = require("path");
 
 function log(...args) {
   console.log(...args);
